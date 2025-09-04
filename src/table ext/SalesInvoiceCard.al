@@ -35,6 +35,12 @@ tableextension 50100 SalesInvoiceCard extends "Sales Header"
             FieldClass = FlowField;
             CalcFormula = max("Last Sold Prize". "Posting date" Where (CustomerNo= field("Sell-to Customer No.")));
         }
+        field(50000; "Subscription ID"; Code[20])
+        {
+            Caption = 'Subscription ID';
+            DataClassification = CustomerContent;
+        }
+        
 
 
     }

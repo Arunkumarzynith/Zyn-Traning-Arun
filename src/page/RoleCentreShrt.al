@@ -18,6 +18,23 @@ page 50209 Zyn_Rolecentre
     //         }
     //     }
     // }
+    layout
+{
+    area(rolecenter)
+    {
+        // Other groups & parts…
+
+        part(ZynSubCue; "Subscription Cue Card")
+        {
+            ApplicationArea = All;
+        }
+    }
+}
+
+   
+
+
+    
     actions
     {
         area(embedding)
@@ -63,13 +80,13 @@ page 50209 Zyn_Rolecentre
                 Caption='Leave Management';
                 action("Leave Category")
                 {
-                    Caption = 'Asset List';
+                    Caption = 'Leave Category';
                     ApplicationArea = All;
                     RunObject = page "Leave Cat List page";
                 }
                 action("Leave Request")
                 {
-                    Caption = 'Asset List';
+                    Caption = 'Leave Request';
                     ApplicationArea = All;
                     RunObject = page "Leave Req List page";
                 }
@@ -79,13 +96,13 @@ page 50209 Zyn_Rolecentre
                 Caption='Expenses';
                 action("Expense Category")
                 {
-                    Caption = 'Asset List';
+                    Caption = 'Expense Category';
                     ApplicationArea = All;
                     RunObject = page "Category List Page";
                 }
                 action("Expense List")
                 {
-                    Caption = 'Asset List';
+                    Caption = 'Expense List';
                     ApplicationArea = All;
                     RunObject = page "Expense List Page";
                 }
@@ -118,11 +135,28 @@ page 50209 Zyn_Rolecentre
                     RunObject = page "Income List Page";
                 }
             }
+            group("Billing~Subscription")
+            {
+                Caption='Budget~Income';
+                action("plan list")
+                {
+                    Caption = 'Budget List';
+                    ApplicationArea = All;
+                    RunObject = page "Budget List Page";
+                }
+                action("SubscriptionList")
+                {
+                    Caption = 'Income Category';
+                    ApplicationArea = All;
+                    RunObject = page " Income Category List Page";
+                }
+                
         }
+    }
     }
     var
         CustomerRec: Record Customer;
  
 }
  
- 
+ // it is the monthly based subcription plan  so that if i give the start date then the end date will be the same date but we could not define the months example if one customer is should give date like 1.1.2025 to 1.11.2025 that shouild be same date but month should be differ so we need to validate the date only after that we have to create a recurring invoice in the business central there is option called job queue enteries using that we have to create a un posted sales invoice that should check daliy if the next billing date in today then it should create a unposted sales invoice  that in the sales header the doucment type is invoice that time we aslo  need a boolean to check whether the invoice is created from the subcription or not 

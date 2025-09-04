@@ -9,7 +9,7 @@ page 50354 "Emp Asset Card"
         area(Content)
         {
             group(BudgetCard)
-            {
+            { 
                 field(EmpID; Rec.EmpID) { ApplicationArea = All; }
                 field(AssetType;Rec.AssetType){ApplicationArea=All;}
                 field(SerialNo; Rec.SerialNo) { ApplicationArea = All; }
@@ -75,5 +75,20 @@ begin
         end;
     end;
 end;
-
+trigger OnQueryClosePage(CloseAction: Action): Boolean
+begin
+    case Rec.Status of
+        Rec.Status::Assgned:
+            if Rec.AssignedDate = 0D then
+                Error('Assigned Date must be filled when status is Assigned.');
+        Rec.Status::retruned:
+            if (Rec.AssignedDate = 0D) or (Rec.ReturnedDate = 0D) then
+                Error('Both Assigned Date and Returned Date must be filled when status is Returned.');
+        Rec.Status::lost:
+            if (Rec.AssignedDate = 0D) or (Rec.LostDate = 0D) then
+                Error('Both Assigned Date and Lost Date must be filled when status is Lost.');
+    end;
+    exit(true);
+end;
 }
+

@@ -1,4 +1,4 @@
-pageextension 50100 ContactListExt extends "Contact List"
+pageextension 50370 ContactListExt extends "Contact List"
 {
     actions
     {
