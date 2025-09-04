@@ -19,6 +19,13 @@ table 50276 "Employ Table"
         {
             DataClassification = ToBeClassified;
         }
+        field(50; "Assigned Asset Count"; Integer)
+{
+FieldClass = FlowField;
+CalcFormula = count("Emp Assets" where(EmpID = field("Emp Id."),
+Status = const(Assgned)));
+}
+
     }
     keys
     {

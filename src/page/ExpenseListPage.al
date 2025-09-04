@@ -40,7 +40,7 @@ page 50131 "Expense List Page"
         }
         area(factboxes)
         {
-            part("Budget Fact box"; "Budget List Page")
+            part("Budget Fact box"; BudgetListPart)
             {
                 ApplicationArea = All;
             }
