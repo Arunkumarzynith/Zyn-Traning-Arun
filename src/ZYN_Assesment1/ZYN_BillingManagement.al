@@ -1,6 +1,6 @@
-codeunit 50215 "Subscription Recurring Billing"
+codeunit 50215 "Subscription Billing Mgt"
 {
-    SingleInstance = true;
+    
 
     var
         SubscriptionRec: Record "Subscription table";
@@ -16,15 +16,20 @@ codeunit 50215 "Subscription Recurring Billing"
         SubscriptionRec.Reset();
         SubscriptionRec.SetRange("NextBilling", 0D, WorkDt); 
         if SubscriptionRec.FindSet() then
+            
             repeat
+
                 if (SubscriptionRec.Status <> SubscriptionRec.Status::Expired) and
                    ((SubscriptionRec.EndDate = 0D) or (SubscriptionRec.EndDate > WorkDt)) then begin
 
                     
-                    if not PlanRec.Get(SubscriptionRec.PlanID) then
+                    if not PlanRec.Get(SubscriptionRec."Plan ID") then
                         continue;
 
                     
+
+
+
                     NewInvNo := GetNextInvoiceNo();
 
                     SalesHeader.Init();
@@ -60,6 +65,7 @@ codeunit 50215 "Subscription Recurring Billing"
         LastNum: Integer;
         NextNum: Integer;
         Suffix: Text[10];
+
     begin
         
         LastHdr.Reset();

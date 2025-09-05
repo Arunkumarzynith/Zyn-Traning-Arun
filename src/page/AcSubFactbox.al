@@ -13,7 +13,7 @@ page 50220 "Active Subscriptions FactBox"
             {
                 ApplicationArea = All;
                 DrillDown = true;
-                DrillDownPageId = SubscriptionList;
+                DrillDownPageId = "Subscription List";
             }
         }
     }

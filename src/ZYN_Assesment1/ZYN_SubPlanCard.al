@@ -10,7 +10,7 @@ page 50210 PlanCard
         {
             group(PlanCard)
             {
-                field(PlanID;Rec.PlanID) 
+                field(PlanID;Rec."Plan ID") 
                 { 
                     ApplicationArea = All; 
                 }

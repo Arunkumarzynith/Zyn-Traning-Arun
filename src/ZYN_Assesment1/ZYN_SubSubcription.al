@@ -10,19 +10,19 @@ table 50392 "Subscription table"
             DataClassification = ToBeClassified;
             TableRelation = Customer."No.";
         }
-        field(3; PlanID; Code[20])
+        field(3; "Plan ID"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Plan Table".PlanID;
+            TableRelation = "Plan Table"."Plan ID";
             trigger OnValidate()
             var
                 PlanRec: Record "Plan Table";
             begin
-                if PlanRec.Get(PlanID) then begin
+                if PlanRec.Get("Plan ID") then begin
                     if PlanRec.Status <> PlanRec.Status::Active then
-                        Error('You can only subscribe to an active plan (%1).', PlanID);
+                        Error('You can only subscribe to an active plan (%1).', "Plan ID");
                 end else
-                    Error('Plan %1 not found.', PlanID);
+                    Error('Plan %1 not found.', "Plan ID");
             end;
 
         }
@@ -31,7 +31,7 @@ table 50392 "Subscription table"
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                // Whenever StartDate changes, recalc EndDate and NextBilling (if Duration set)
+
                 UpdateDates();
             end;
         }
@@ -40,18 +40,27 @@ table 50392 "Subscription table"
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                // Duration is in months
+            
                 UpdateDates();
             end;
         }
-        field(5; EndDate; Date) { DataClassification = ToBeClassified; }
-        field(6; Status; Enum "Subcription Status") { DataClassification = ToBeClassified; }
-        field(7; NextBilling; Date) { DataClassification = ToBeClassified; }
+        field(5; EndDate; Date) 
+        {
+             DataClassification = ToBeClassified;
+         }
+        field(6; Status; Enum "Subcription Status") 
+        {
+             DataClassification = ToBeClassified;
+        }
+        field(7; NextBilling; Date) 
+        {
+             DataClassification = ToBeClassified; 
+        }
     }
 
     keys
     {
-        key(PK; SubID, PlanID)
+        key(PK; SubID, "Plan ID")
         {
             Clustered = true;
         }
@@ -59,14 +68,14 @@ table 50392 "Subscription table"
 
     trigger OnInsert()
     begin
-        // Ensure dates & status initialized
+        // Ensure dates & status initializedfor the UI
         UpdateDates();
         UpdateStatus();
     end;
 
     trigger OnModify()
     begin
-        // After any change, ensure status reflects EndDate vs WorkDate
+
         UpdateStatus();
     end;
 
@@ -74,12 +83,11 @@ table 50392 "Subscription table"
     var
         Expr: Text[30];
     begin
-        // Compute EndDate: StartDate + Duration months
+        
         if (StartDate <> 0D) and (Duration > 0) then begin
             Expr := StrSubstNo('<+%1M>', Format(Duration));
             EndDate := System.CalcDate(Expr, StartDate);
-            // Next billing initial value: first billing after start = StartDate + 1 month
-            // Only set NextBilling if blank (so we don't overwrite after billing runs)
+            
             if NextBilling = 0D then
                 NextBilling := System.CalcDate('<+1M>', StartDate);
         end;
@@ -89,7 +97,7 @@ table 50392 "Subscription table"
     var
         WD: Date;
     begin
-        // Get current WorkDate (session). If not set, WorkDate returns today's date.
+        // Get the  current WorkDate (session). If not set, WorkDate returns today's date.
         WD := System.WorkDate();
         if (EndDate <> 0D) and (EndDate <= WD) then
             Status := Status::Active
@@ -99,7 +107,7 @@ table 50392 "Subscription table"
                 Status := Status::Active;
     end;
 
-    // call this to advance NextBilling by +1 month after a run
+    // call  to advance NextBilling by +1 month after a run
     local procedure AdvanceNextBilling()
     begin
         if NextBilling <> 0D then

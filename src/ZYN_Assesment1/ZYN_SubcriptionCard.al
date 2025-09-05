@@ -1,4 +1,4 @@
-page 50212 SubscriptionCard
+page 50312 "Subscription Card"
 {
     PageType = Card;
     ApplicationArea = All;
@@ -18,7 +18,7 @@ page 50212 SubscriptionCard
                 { 
                     ApplicationArea = All; 
                 }
-                field(PlanID;Rec.PlanID) 
+                field(PlanID;Rec."Plan ID") 
                 { 
                     ApplicationArea = All; 
                 }
@@ -26,10 +26,22 @@ page 50212 SubscriptionCard
                 { 
                     ApplicationArea = All; 
                 }
-                field(Duration;Rec.Duration){ApplicationArea=All;}
-                field(EndDate;Rec.EndDate){ApplicationArea=All;}
-                field(Status;Rec.Status){ApplicationArea=All;}
-                field(NextBilling;Rec.NextBilling){ApplicationArea=All;}
+                field(Duration;Rec.Duration)
+                {
+                    ApplicationArea=All;
+                }
+                field(EndDate;Rec.EndDate)
+                {
+                    ApplicationArea=All;
+                }
+                field(Status;Rec.Status)
+                {
+                    ApplicationArea=All;
+                }
+                field(NextBilling;Rec.NextBilling)
+                {
+                    ApplicationArea=All;
+                }
             }
         }
     }

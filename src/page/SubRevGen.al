@@ -1,4 +1,4 @@
-page 50417 "Subscription Cue Card"
+page 50427 "Subscription Cue Card"
 {
     PageType = CardPart;
     ApplicationArea = All;
@@ -12,7 +12,7 @@ page 50417 "Subscription Cue Card"
             {
                 Caption = 'Subscriptions';
 
-                field("Active Subscriptions"; ActiveSubs)
+                field("Active Subscriptions"; ActiveSub)
                 {
                     ApplicationArea = All;
                     DrillDown = true;
@@ -21,7 +21,7 @@ page 50417 "Subscription Cue Card"
                         SubRec: Record "Subscription Table";
                     begin
                         SubRec.SetRange(Status, SubRec.Status::Active);
-                        Page.Run(Page::"SubscriptionList", SubRec);
+                        Page.Run(Page::"Subscription List", SubRec);
                     end;
                 }
 
@@ -50,7 +50,7 @@ page 50417 "Subscription Cue Card"
     }
 
     var
-        ActiveSubs: Integer;
+        ActiveSub: Integer;
         RevenueThisMonth: Decimal;
 
     trigger OnOpenPage()
@@ -63,7 +63,7 @@ page 50417 "Subscription Cue Card"
     begin
         // Active subscriptions
         SubRec.SetRange(Status, SubRec.Status::Active);
-        ActiveSubs := SubRec.Count();
+        ActiveSub := SubRec.Count();
 
         // Revenue this month
         StartDate := DMY2Date(1, Date2DMY(WorkDate(), 2), Date2DMY(WorkDate(), 3));

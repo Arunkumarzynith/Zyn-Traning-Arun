@@ -1,7 +1,7 @@
 codeunit 50239 "Recurring Expense Mgt"
 {
     Subtype = Normal;
-    SingleInstance = false;
+
 
     trigger OnRun()
     begin
