@@ -28,6 +28,10 @@ page 50209 Zyn_Rolecentre
         {
             ApplicationArea = All;
         }
+        part(NotifyPart; "renewNotification")
+        {
+            ApplicationArea = All;
+        }
     }
 }
 
@@ -156,7 +160,8 @@ page 50209 Zyn_Rolecentre
     }
     var
         CustomerRec: Record Customer;
+
+    
  
 }
  
- // it is the monthly based subcription plan  so that if i give the start date then the end date will be the same date but we could not define the months example if one customer is should give date like 1.1.2025 to 1.11.2025 that shouild be same date but month should be differ so we need to validate the date only after that we have to create a recurring invoice in the business central there is option called job queue enteries using that we have to create a un posted sales invoice that should check daliy if the next billing date in today then it should create a unposted sales invoice  that in the sales header the doucment type is invoice that time we aslo  need a boolean to check whether the invoice is created from the subcription or not 

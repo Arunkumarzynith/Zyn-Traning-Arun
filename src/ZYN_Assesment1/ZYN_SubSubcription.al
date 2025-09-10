@@ -4,7 +4,10 @@ table 50392 "Subscription table"
 
     fields
     {
-        field(1; SubID; Integer) { DataClassification = ToBeClassified; }
+        field(1; SubID; Integer) 
+        {
+             DataClassification = ToBeClassified; 
+        }   
         field(2; CustomerID; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -55,6 +58,21 @@ table 50392 "Subscription table"
         field(7; NextBilling; Date) 
         {
              DataClassification = ToBeClassified; 
+        }
+        field(9; "Next Renewal date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+    begin
+        if ("Next Renewal date" <= "EndDate") then
+            Error('Next Renewal Date must be after End Date.');
+    end;
+        }
+        field(10; "renewal notified"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Renewal Notified';
+            InitValue = false;
         }
     }
 

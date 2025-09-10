@@ -42,6 +42,14 @@ page 50312 "Subscription Card"
                 {
                     ApplicationArea=All;
                 }
+                field("Next Renewal date"; Rec."Next Renewal date")
+                {
+                    ApplicationArea=All;
+                }
+                field("renewal notified"; Rec."renewal notified")
+                {
+                    ApplicationArea=All;
+                }
             }
         }
     }

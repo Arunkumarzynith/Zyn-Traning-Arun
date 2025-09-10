@@ -53,13 +53,14 @@ page 50427 "Subscription Cue Card"
         ActiveSub: Integer;
         RevenueThisMonth: Decimal;
 
-    trigger OnOpenPage()
+    trigger OnAfterGetRecord()
     var
         SubRec: Record "Subscription Table";
         SalesHdr: Record "Sales Header";
         StartDate: Date;
         EndDate: Date;
         totalamnt:Decimal;
+        
     begin
         // Active subscriptions
         SubRec.SetRange(Status, SubRec.Status::Active);
@@ -84,5 +85,21 @@ page 50427 "Subscription Cue Card"
         
 
         RevenueThisMonth := totalamnt;
+    
     end;
+    // trigger OnOpenPage()
+    // var
+    //     RenewalMgt: Codeunit "Renewal Notification Mgt";
+    // begin
+    //     // 🔹 Run the notification check whenever role centre opens
+    //     RenewalMgt.Run();
+    // end;
+
+    
+    
+
+        
+        
+    
+        
 }

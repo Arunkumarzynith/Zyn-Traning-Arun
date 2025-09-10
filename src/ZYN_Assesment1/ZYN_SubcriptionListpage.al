@@ -5,7 +5,6 @@ page 50211 "Subscription List"
     UsageCategory = Lists;
     SourceTable = "Subscription Table";
     CardPageId = 50312;
-    //Editable=false;
     InsertAllowed = false;
     ModifyAllowed = false;
     layout
@@ -43,6 +42,14 @@ page 50211 "Subscription List"
                     ApplicationArea=All;
                 }
                 field("Next Billing"; Rec.NextBilling)
+                {
+                    ApplicationArea=All;
+                }
+                field("Next Renewal date"; Rec."Next Renewal date")
+                {
+                    ApplicationArea=All;
+                }
+                field("renewal notified"; Rec."renewal notified")
                 {
                     ApplicationArea=All;
                 }
